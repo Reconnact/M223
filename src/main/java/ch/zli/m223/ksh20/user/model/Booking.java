@@ -2,7 +2,7 @@ package ch.zli.m223.ksh20.user.model;
 
 import java.time.LocalDate;
 
-public interface Bookings {
+public interface Booking {
 
     LocalDate getDate();
     boolean isFullDay();

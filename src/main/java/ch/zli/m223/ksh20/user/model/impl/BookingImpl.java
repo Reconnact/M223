@@ -1,6 +1,6 @@
 package ch.zli.m223.ksh20.user.model.impl;
 
-import ch.zli.m223.ksh20.user.model.Bookings;
+import ch.zli.m223.ksh20.user.model.Booking;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 
 @Entity(name = "Bookings")
-public class BookingsImpl implements Bookings {
+public class BookingImpl implements Booking {
 
     @Id
     @GeneratedValue
@@ -24,13 +24,13 @@ public class BookingsImpl implements Bookings {
     @Column(name = "accepted")
     private boolean accepted;
 
-    public BookingsImpl(LocalDate date, boolean isFullDay, boolean accepted){
+    public BookingImpl(LocalDate date, boolean isFullDay, boolean accepted){
         this.date = date;
         this.isFullDay = isFullDay;
         this.accepted = accepted;
     }
 
-    public BookingsImpl() {
+    public BookingImpl() {
 
     }
 
