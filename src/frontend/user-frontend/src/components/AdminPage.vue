@@ -6,6 +6,7 @@
     <table>
       <thead>
       <tr>
+        <th>ID</th>
         <th>First name</th>
         <th>Last name</th>
         <th>E-mail</th>
@@ -14,7 +15,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="user in users" :key="user.id">
+      <tr v-for="user in users" :key="user.id" :id="user.id">
+        <td >
+          {{ user.id }}
+        </td>
         <td >
           {{ user.firstName }}
         </td>
@@ -27,21 +31,7 @@
         <td >
           {{ user.role }}
         </td>
-        <td><button class="delete-button" :id="user.email" onclick="{
-          const row = button.parentNode.parentNode;
-          row.parentNode.removeChild(row);
-          try {
-            const response = await fetch('/web/users/' +  + '/delete', {
-              method: 'DELETE',
-            });
-
-            if (!response.ok) {
-              throw new Error('Request failed');
-            }
-          } catch (error) {
-            console.error(error);
-          }
-        }">Delete</button></td>
+        <td><button class="delete-button" :id="user.email" @click="deleteUser(user.id)">Delete</button></td>
       </tr>
       </tbody>
     </table>
@@ -62,14 +52,24 @@ export default {
     const res = await axios.get('/api/v1/users/list');
     const data = await res.data;
     this.users = data;
+  },
+  methods: {
+    deleteUser: async function  (id) {
+      document.getElementById(id).style.display = "none ";
+      try {
+        const response = await axios.delete('/api/v1/users/' + id + "/delete");
 
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
-};
-
-
-const deleteUser = async (id) => {
 
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
