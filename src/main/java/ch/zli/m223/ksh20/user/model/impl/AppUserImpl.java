@@ -22,12 +22,16 @@ public class AppUserImpl implements AppUser {
     @Column(nullable = false)
     private String passwordHash;
 
-    public AppUserImpl(String firstName, String lastName, String email, String password) {
+    @Column()
+    private String role = "guest";
+
+    public AppUserImpl(String firstName, String lastName, String email, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         passwordHash = password;
         //TODO: hash it
+        this.role = role;
     }
 
     /** For JPA use only */
@@ -56,6 +60,11 @@ public class AppUserImpl implements AppUser {
     @Override
     public String getPassword() {
         return passwordHash;
+    }
+
+    @Override
+    public String getRole() {
+        return role;
     }
 
 }

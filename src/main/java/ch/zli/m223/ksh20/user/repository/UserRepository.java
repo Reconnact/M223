@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<AppUserImpl, Long> {
 
-    public default AppUser insertUser(String firstName, String lastName, String email, String password){
-        var appUser = new AppUserImpl(firstName, lastName, email, password);
+    public default AppUser insertUser(String firstName, String lastName, String email, String password, String role){
+        var appUser = new AppUserImpl(firstName, lastName, email, password, role);
         return save(appUser);
     }
 

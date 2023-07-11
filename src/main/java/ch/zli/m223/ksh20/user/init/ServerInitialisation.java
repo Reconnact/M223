@@ -14,7 +14,7 @@ public class ServerInitialisation implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        userRepository.insertUser("Hermann", "Witte", "email", "password");
-        userRepository.insertUser("Jakub", "Corona", "email1", "password");
+        userRepository.insertUser("Hermann", "Witte", "email", "password", "admin");
+        userRepository.insertUser("Jakub", "Corona", "email1", "password", "admin");
     }
 }

@@ -6,4 +6,6 @@ public interface AppUser {
     String getLastName();
     String getEmail();
     String getPassword();
+
+    String getRole();
 }

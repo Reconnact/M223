@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService{
             throw new UserAlreadyExistsException();
         }
 
-        return userRepository.insertUser(firstName, lastName, email, password);
+        return userRepository.insertUser(firstName, lastName, email, password, "member");
 
     }
 
     @Override
     public AppUser login(String email, String password) {
-        return new AppUserImpl("","",email, password);
+        return new AppUserImpl("","",email, password, "");
     }
 
     @Override
