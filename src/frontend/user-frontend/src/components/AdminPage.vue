@@ -36,6 +36,7 @@
       </tbody>
     </table>
   </div>
+  <button onclick="window.location.href = '/addUser'" >Add User</button>
 </template>
 <script>
 
@@ -59,7 +60,7 @@ export default {
       try {
         const response = await axios.delete('/api/v1/users/' + id + "/delete");
 
-        if (!response.ok) {
+        if (!response.status == 200) {
           throw new Error('Request failed');
         }
       } catch (error) {
