@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
-   /* @Autowired
+   @Autowired
     private UserService userService;
 
-    @GetMapping("/web/users")
+    @GetMapping("/list")
     String getUserList (Model model) {
         List<AppUser> users = userService.getUserList();
         model.addAttribute("users", users);
         return "userList";
     }
 
-    @GetMapping("/web/users/{id}")
+    /**@GetMapping("/web/users/{id}")
     String getUser (Model model, @PathVariable Long id){
         AppUser user = userService.getUserById(id);
         model.addAttribute("userId", user);
@@ -35,18 +36,18 @@ public class UserController {
         //List<AppUser> users = userService.addUser(userName, password);
 //        model.addAttribute("users", users);
         return "userList";
-    }
+    }*/
 
-    @DeleteMapping("/web/users/{id}/delete")
+    /**@DeleteMapping("/web/users/{id}/delete")
     String deleteUser (Model model, @PathVariable Long id){
         userService.deleteUser(id);
         List<AppUser> users = userService.getUserList();
         model.addAttribute("users", users);
         return "userList";
-    }
+    }*/
 
     @GetMapping("/error")
     String getError (){
         return "error";
-    }*/
+    }
 }
