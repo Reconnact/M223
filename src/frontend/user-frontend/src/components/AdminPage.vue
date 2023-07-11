@@ -11,7 +11,8 @@
         <th>Last name</th>
         <th>E-mail</th>
         <th>Role</th>
-        <th>Action</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
       </thead>
       <tbody>
@@ -31,7 +32,9 @@
         <td >
           {{ user.role }}
         </td>
-        <td><button class="delete-button" :id="user.email" @click="deleteUser(user.id)">Delete</button></td>
+        <td><button class="edit-button"  @click="editUser(user.id)">Edit</button></td>
+        <td><button class="delete-button"  @click="deleteUser(user.id)">Delete</button></td>
+
       </tr>
       </tbody>
     </table>
@@ -66,6 +69,9 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    editUser: async function  (id) {
+      window.location.href = "/editUser/" + id
     }
   }
 
@@ -107,6 +113,19 @@ tr:hover {
 }
 .delete-button {
   background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #3639f4;
   color: white;
   border: none;
   padding: 6px 12px;

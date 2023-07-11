@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,6 +32,19 @@ public class UserRestController {
     void login(@RequestBody UserLoginDto userInput) {
 
         System.out.println(userService.login(userInput.email, userInput.password));
+    }
+
+    @GetMapping("/{id}")
+    Map<String, String> getUser(@PathVariable Long id) {
+        AppUser user = userService.getUserById(id);
+        HashMap<String, String> map = new HashMap<>();
+        if (user.getEmail() == "" || user.getEmail().isEmpty()){
+            return map;
+        }
+        map.put("firstName", user.getFirstName());
+        map.put("lastName", user.getLastName());
+        map.put("email", user.getEmail());
+        return map;
     }
 
     @DeleteMapping("/{id}/delete")

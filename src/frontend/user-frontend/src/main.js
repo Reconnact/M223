@@ -6,12 +6,16 @@ import mitt from 'mitt';
 import {createRouter, createWebHistory} from "vue-router";
 import AdminPage from "@/components/AdminPage.vue";
 import AddUserPage from "@/components/AddUserPage.vue";
+import EditUser from "@/components/EditUser.vue";
+import PageNotFound from "@/components/PageNotFound.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: "/", name: "AdminPage", component: AdminPage},
-        {path: "/addUser", name: "AddUserPage", component: AddUserPage}
+        {path: "/addUser", name: "AddUserPage", component: AddUserPage},
+        {path: "/editUser/:id", name: "EditUserPage", component: EditUser},
+        { path: "/:catchAll(.*)", name: "PageNotFoundPage", component: PageNotFound }
     ]
 })
 
