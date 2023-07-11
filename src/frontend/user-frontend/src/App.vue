@@ -1,15 +1,12 @@
 <template>
-  <AdminPage />
+  <router-view></router-view>
 </template>
 
 <script>
 import AdminPage from "@/components/AdminPage.vue";
 
 export default {
-  name: 'App',
-  components: {
-    AdminPage
-  }
+  name: 'App'
 }
 </script>
 

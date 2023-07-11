@@ -7,6 +7,7 @@ import ch.zli.m223.ksh20.user.model.impl.AppUserImpl;
 import ch.zli.m223.ksh20.user.service.UserService;
 import ch.zli.m223.ksh20.user.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,13 @@ public class UserRestController {
     void login(@RequestBody UserLoginDto userInput) {
 
         System.out.println(userService.login(userInput.email, userInput.password));
+    }
+
+    @DeleteMapping("/{id}/delete")
+    void delete(Model model, @PathVariable Long id) {
+        userService.deleteUser(id);
+        List<AppUser> users = userService.getUserList();
+        model.addAttribute("users", users);
     }
 
     @GetMapping("/list")
