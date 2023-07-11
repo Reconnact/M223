@@ -24,6 +24,15 @@ public class BookingsImpl implements Bookings {
     @Column(name = "accepted")
     private boolean accepted;
 
+    public BookingsImpl(LocalDate date, boolean isFullDay, boolean accepted){
+        this.date = date;
+        this.isFullDay = isFullDay;
+        this.accepted = accepted;
+    }
+
+    public BookingsImpl() {
+
+    }
 
     public Long getId() {
         return id;
