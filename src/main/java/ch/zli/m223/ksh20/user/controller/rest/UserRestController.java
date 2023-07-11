@@ -47,6 +47,11 @@ public class UserRestController {
         return map;
     }
 
+    @PutMapping("/{id}/update")
+    void update(@RequestBody UserInputDto userInput, @PathVariable Long id) {
+        userService.updateUser(id, userInput.firstName, userInput.lastName, userInput.email);
+    }
+
     @DeleteMapping("/{id}/delete")
     void delete(Model model, @PathVariable Long id) {
         userService.deleteUser(id);

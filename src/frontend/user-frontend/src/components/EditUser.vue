@@ -52,7 +52,31 @@ export default {
     this.user = data;
   },
   methods : {
+    updateUser: async function  () {
+      try {
+        const response = await axios({
+          method: 'put',
+          url: "/api/v1/users/" +this.$route.params.id + "/update",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            "id": parseInt(this.$route.params.id),
+            "firstName": document.getElementById("firstName").value,
+            "lastName": document.getElementById("lastName").value,
+            "email": document.getElementById("email").value,
+          }
+        });
 
+        if (!response.status == 200) {
+          throw new Error('Request failed');
+        } else {
+          window.location.href = "/";
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 
 };

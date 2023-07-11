@@ -13,6 +13,12 @@ public interface UserRepository extends JpaRepository<AppUserImpl, Long> {
         return save(appUser);
     }
 
+    public default AppUser updateUser(AppUserImpl user){
+        var appUser = user;
+        return save(appUser);
+    }
+
+
     public Optional<AppUser> findByEmail(String email);
 
 }

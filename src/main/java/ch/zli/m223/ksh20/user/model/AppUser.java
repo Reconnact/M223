@@ -7,4 +7,10 @@ public interface AppUser {
     String getEmail();
     String getPassword();
     String getRole();
+
+    void setFirstname(String firstName);
+
+    void setLastname(String lastName);
+
+    void setEmail(String email);
 }

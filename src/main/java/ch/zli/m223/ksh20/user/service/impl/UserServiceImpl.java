@@ -52,4 +52,14 @@ public class UserServiceImpl implements UserService{
         userRepository.delete(getUserById(id));
     }
 
+    @Override
+    public void updateUser(Long id, String firstName, String lastName, String email) {
+        AppUserImpl user = getUserById(id);
+        user.setFirstname(firstName);
+        user.setLastname(lastName);
+        user.setEmail(email);
+        userRepository.updateUser(user);
+    }
+
+
 }

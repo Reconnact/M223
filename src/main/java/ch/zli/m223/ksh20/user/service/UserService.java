@@ -15,4 +15,7 @@ public interface UserService {
 
     AppUser login(String email, String password);
     void deleteUser(Long id);
+
+    void updateUser(Long id, String firstName, String lastName,
+                    String email);
 }

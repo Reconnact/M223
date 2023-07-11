@@ -67,4 +67,19 @@ public class AppUserImpl implements AppUser {
         return role;
     }
 
+    @Override
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Override
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
