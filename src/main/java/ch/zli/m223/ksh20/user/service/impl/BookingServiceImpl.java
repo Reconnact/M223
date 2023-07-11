@@ -27,7 +27,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking addBooking(LocalDate date, boolean isFullDay, boolean accepted) {
+    public Booking addBooking(String date, boolean isFullDay, boolean accepted) {
         // TODO: validation
         return bookingRepository.insertBooking(date, isFullDay, accepted);
     }
