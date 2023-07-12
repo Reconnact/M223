@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
+
 
 @Entity(name = "Bookings")
 public class BookingImpl implements Booking {
@@ -15,7 +17,7 @@ public class BookingImpl implements Booking {
     private long id;
 
     @Column(name = "date")
-    private String date;
+    private LocalDate date;
 
     @Column(name = "isFullDay")
     private boolean isFullDay;
@@ -25,7 +27,7 @@ public class BookingImpl implements Booking {
 
     // TODO: Author
 
-    public BookingImpl(String date, boolean isFullDay, boolean accepted){
+    public BookingImpl(LocalDate date, boolean isFullDay, boolean accepted){
         this.date = date;
         this.isFullDay = isFullDay;
         this.accepted = accepted;
@@ -40,7 +42,7 @@ public class BookingImpl implements Booking {
     }
 
     @Override
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -54,7 +56,7 @@ public class BookingImpl implements Booking {
         return accepted;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

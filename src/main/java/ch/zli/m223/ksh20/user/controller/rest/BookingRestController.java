@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class BookingRestController {
     Map<String, String> getBooking(@PathVariable Long id){
         Booking booking = bookingService.getBookingById(id);
         HashMap<String, String> map = new HashMap<>();
-        map.put("date", booking.getDate());
+        map.put("date", booking.getDate().toString());
         map.put("isFullDay", String.valueOf(booking.isFullDay()));
         map.put("accepted", String.valueOf(booking.accepted()));
         return map;
@@ -40,7 +41,7 @@ public class BookingRestController {
 
     @PutMapping("/{id}/update")
     void update(@RequestBody BookingInputDto bookingInput, @PathVariable Long id) {
-        bookingService.updateBooking(id, bookingInput.date, bookingInput.isFullDay, bookingInput.accepted);
+        bookingService.updateBooking(id, LocalDate.parse(bookingInput.date), bookingInput.isFullDay, bookingInput.accepted);
     }
 
 

@@ -2,9 +2,11 @@ package ch.zli.m223.ksh20.user.controller.rest.dto;
 
 import ch.zli.m223.ksh20.user.model.Booking;
 
+import java.time.LocalDate;
+
 public class BookingDto {
 
-    public String date;
+    public LocalDate date;
     public boolean isFullDay, accepted;
     public Long id;
     public BookingDto(Booking booking) {

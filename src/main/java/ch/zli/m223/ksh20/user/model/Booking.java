@@ -1,9 +1,11 @@
 package ch.zli.m223.ksh20.user.model;
 
+import java.time.LocalDate;
+
 public interface Booking {
 
     Long getId();
-    String getDate();
+    LocalDate getDate();
     boolean isFullDay();
     boolean accepted();
 
