@@ -3,6 +3,7 @@ package ch.zli.m223.ksh20.user.controller.rest;
 import ch.zli.m223.ksh20.user.controller.rest.dto.BookingDto;
 import ch.zli.m223.ksh20.user.controller.rest.dto.BookingInputDto;
 import ch.zli.m223.ksh20.user.model.Booking;
+import ch.zli.m223.ksh20.user.model.impl.BookingImpl;
 import ch.zli.m223.ksh20.user.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,8 +29,13 @@ public class BookingRestController {
     }
 
     @GetMapping("/{id}")
-    Booking getBooking(@PathVariable Long id){
-        return bookingService.getBookingById(id);
+    Map<String, String> getBooking(@PathVariable Long id){
+        Booking booking = bookingService.getBookingById(id);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("date", booking.getDate());
+        map.put("isFullDay", String.valueOf(booking.isFullDay()));
+        map.put("accepted", String.valueOf(booking.accepted()));
+        return map;
     }
 
     @PutMapping("/{id}/update")
