@@ -1,14 +1,14 @@
 package ch.zli.m223.ksh20.user.controller.rest;
 
 import ch.zli.m223.ksh20.user.controller.rest.dto.BookingDto;
+import ch.zli.m223.ksh20.user.controller.rest.dto.BookingInputDto;
 import ch.zli.m223.ksh20.user.model.Booking;
 import ch.zli.m223.ksh20.user.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +20,20 @@ public class BookingRestController {
     private BookingService bookingService;
 
     @GetMapping("/list")
-    Booking getBookingList(){
-        return bookingService.getBookingList().get(0);
-        /*return bookingService.getAllBookings().stream()
+    List<BookingDto> getBookingList(){
+        return bookingService.getBookingList().stream()
                 .map(booking -> new BookingDto(booking))
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    Booking getBooking(@PathVariable Long id){
+        return bookingService.getBookingById(id);
+    }
+
+    @PutMapping("/{id}/update")
+    void update(@RequestBody BookingInputDto bookingInput, @PathVariable Long id) {
+        bookingService.updateBooking(id, bookingInput.date, bookingInput.isFullDay, bookingInput.accepted);
     }
 
 

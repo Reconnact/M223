@@ -53,4 +53,16 @@ public class BookingImpl implements Booking {
     public boolean accepted() {
         return accepted;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setFullDay(boolean fullDay) {
+        isFullDay = fullDay;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
 }

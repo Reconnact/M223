@@ -1,6 +1,7 @@
 package ch.zli.m223.ksh20.user.service.impl;
 
 import ch.zli.m223.ksh20.user.model.Booking;
+import ch.zli.m223.ksh20.user.model.impl.AppUserImpl;
 import ch.zli.m223.ksh20.user.model.impl.BookingImpl;
 import ch.zli.m223.ksh20.user.repository.BookingRepository;
 import ch.zli.m223.ksh20.user.service.BookingService;
@@ -31,6 +32,15 @@ public class BookingServiceImpl implements BookingService {
     public Booking addBooking(String date, boolean isFullDay, boolean accepted) {
         // TODO: validation
         return bookingRepository.insertBooking(date, isFullDay, accepted);
+    }
+
+    @Override
+    public void updateBooking(Long id, String date, boolean isFullDay, boolean accepted) {
+        BookingImpl booking = getBookingById(id);
+        booking.setDate(date);
+        booking.setFullDay(isFullDay);
+        booking.setAccepted(accepted);
+        bookingRepository.updateBooking(booking);
     }
 
     @Override
