@@ -46,7 +46,7 @@
 import axios from "axios";
 
 export default {
-  name: 'AdminPage',
+  name: 'AdminUser',
   data() {
     return {
       users: []

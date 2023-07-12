@@ -17,7 +17,8 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private BookingRepository bookingRepository;
     @Override
-    public List<Booking> getAllBookings() {
+    public List<Booking> getBookingList() {
+        System.out.println(bookingRepository.findAll().get(0).getDate());
         return new ArrayList<>(bookingRepository.findAll());
     }
 

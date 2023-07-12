@@ -7,6 +7,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class ServerInitialisation implements ApplicationRunner {
 
@@ -19,7 +21,8 @@ public class ServerInitialisation implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         userRepository.insertUser("Hermann", "Witte", "email", "password", "admin");
         userRepository.insertUser("Jakub", "Corona", "email1", "password", "admin");
-
-        bookingRepository.insertBooking("heute", true, false);
+        bookingRepository.insertBooking("Heute", true, false);
+        bookingRepository.insertBooking("Heute", false, false);
+        bookingRepository.insertBooking("Heute", false, true);
     }
 }

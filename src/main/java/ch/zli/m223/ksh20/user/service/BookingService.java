@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookingService {
 
-    List<Booking> getAllBookings();
+    List<Booking> getBookingList();
     BookingImpl getBookingById(Long id);
     Booking addBooking(String date, boolean isFullDay, boolean accepted);
     void deleteBooking(Long id);
