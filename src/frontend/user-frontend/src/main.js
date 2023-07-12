@@ -4,12 +4,12 @@ import App from '@/App';
 import axios from 'axios';
 import mitt from 'mitt';
 import {createRouter, createWebHistory} from "vue-router";
-import AdminPage from "@/components/admin/AdminBooking.vue";
-import AddUserPage from "@/components/AddUserPage.vue";
-import EditUser from "@/components/EditUser.vue";
+import AddUserPage from "@/components/admin/user/AddUserPage.vue";
+import EditUser from "@/components/admin/user/EditUser.vue";
 import PageNotFound from "@/components/PageNotFound.vue";
-import AdminUser from "@/components/admin/AdminUser.vue";
-import AdminBooking from "@/components/admin/AdminBooking.vue";
+import AdminUser from "@/components/admin/user/AdminUser.vue";
+import AdminBooking from "@/components/admin/booking/AdminBooking.vue";
+import AddBookingPage from "@/components/admin/booking/AddBookingPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,6 +17,7 @@ const router = createRouter({
         {path: "/booking", name: "AdminBooking", component: AdminBooking},
         {path: "/users", name: "AdminUserPage", component: AdminUser},
         {path: "/addUser", name: "AddUserPage", component: AddUserPage},
+        {path: "/addBooking", name: "AddBookingPage", component: AddBookingPage},
         {path: "/editUser/:id", name: "EditUserPage", component: EditUser},
         { path: "/:catchAll(.*)", name: "PageNotFoundPage", component: PageNotFound }
     ]
