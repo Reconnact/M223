@@ -8,6 +8,7 @@ public interface Booking {
     LocalDate getDate();
     boolean isFullDay();
     boolean accepted();
+    Long getUserId();
 
 
 }

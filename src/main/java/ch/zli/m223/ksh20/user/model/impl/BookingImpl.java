@@ -1,10 +1,8 @@
 package ch.zli.m223.ksh20.user.model.impl;
 
+import ch.zli.m223.ksh20.user.model.AppUser;
 import ch.zli.m223.ksh20.user.model.Booking;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -25,12 +23,22 @@ public class BookingImpl implements Booking {
     @Column(name = "accepted")
     private boolean accepted;
 
-    // TODO: Author
+    @Column
+    private Long userId;
+    /*
+    Bro unglaublich - Join mit user
 
-    public BookingImpl(LocalDate date, boolean isFullDay, boolean accepted){
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AppUser user;
+
+    */
+
+    public BookingImpl(LocalDate date, boolean isFullDay, boolean accepted, Long userId){
         this.date = date;
         this.isFullDay = isFullDay;
         this.accepted = accepted;
+        this.userId = userId;
     }
 
     public BookingImpl() {
@@ -56,6 +64,10 @@ public class BookingImpl implements Booking {
         return accepted;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -66,5 +78,9 @@ public class BookingImpl implements Booking {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

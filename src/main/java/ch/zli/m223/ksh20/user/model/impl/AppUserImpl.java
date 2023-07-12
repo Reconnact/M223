@@ -1,9 +1,9 @@
 package ch.zli.m223.ksh20.user.model.impl;
 import ch.zli.m223.ksh20.user.model.AppUser;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import ch.zli.m223.ksh20.user.model.Booking;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "AppUser")
 public class AppUserImpl implements AppUser {
@@ -24,6 +24,14 @@ public class AppUserImpl implements AppUser {
 
     @Column()
     private String role = "guest";
+
+    /*
+    Bro unglaublich - Join mit booking
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Booking> bookings;
+
+    */
 
     public AppUserImpl(String firstName, String lastName, String email, String password, String role) {
         this.firstName = firstName;

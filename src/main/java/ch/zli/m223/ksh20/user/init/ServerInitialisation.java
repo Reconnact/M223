@@ -22,8 +22,8 @@ public class ServerInitialisation implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         userRepository.insertUser("Hermann", "Witte", "email", "password", "admin");
         userRepository.insertUser("Jakub", "Corona", "email1", "password", "admin");
-        bookingRepository.insertBooking(LocalDate.of(2023, 6, 6), true, false);
-        bookingRepository.insertBooking(LocalDate.of(2023, 4, 5), false, false);
-        bookingRepository.insertBooking(LocalDate.of(2023, 12, 27), false, true);
+        bookingRepository.insertBooking(LocalDate.of(2023, 6, 6), true, false, 1L);
+        bookingRepository.insertBooking(LocalDate.of(2023, 4, 5), false, false, 1L);
+        bookingRepository.insertBooking(LocalDate.of(2023, 12, 27), false, true, 1L);
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDate;
 
 public interface BookingRepository extends JpaRepository<BookingImpl, Long> {
-    public default Booking insertBooking(LocalDate date, boolean isFullDay, boolean accepted){
-        var booking = new BookingImpl(date, isFullDay, accepted);
+    public default Booking insertBooking(LocalDate date, boolean isFullDay, boolean accepted, Long userId){
+        var booking = new BookingImpl(date, isFullDay, accepted, userId);
         return save(booking);
     }
 

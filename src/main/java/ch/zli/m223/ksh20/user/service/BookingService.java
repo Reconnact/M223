@@ -10,7 +10,7 @@ public interface BookingService {
 
     List<Booking> getBookingList();
     BookingImpl getBookingById(Long id);
-    Booking addBooking(LocalDate date, boolean isFullDay, boolean accepted);
+    Booking addBooking(LocalDate date, boolean isFullDay, boolean accepted, Long userId);
     void updateBooking(Long id, LocalDate date, boolean isFullDay, boolean accepted);
     void deleteBooking(Long id);
 
