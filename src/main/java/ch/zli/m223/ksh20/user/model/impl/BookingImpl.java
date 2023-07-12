@@ -41,16 +41,16 @@ public class BookingImpl implements Booking {
 
     @Override
     public String getDate() {
-        return null;
+        return date;
     }
 
     @Override
     public boolean isFullDay() {
-        return false;
+        return isFullDay;
     }
 
     @Override
     public boolean accepted() {
-        return false;
+        return accepted;
     }
 }
