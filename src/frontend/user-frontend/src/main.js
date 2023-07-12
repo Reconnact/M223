@@ -4,16 +4,17 @@ import App from '@/App';
 import axios from 'axios';
 import mitt from 'mitt';
 import {createRouter, createWebHistory} from "vue-router";
-import AdminPage from "@/components/admin/AdminPage.vue";
+import AdminPage from "@/components/admin/AdminBooking.vue";
 import AddUserPage from "@/components/AddUserPage.vue";
 import EditUser from "@/components/EditUser.vue";
 import PageNotFound from "@/components/PageNotFound.vue";
 import AdminUser from "@/components/admin/AdminUser.vue";
+import AdminBooking from "@/components/admin/AdminBooking.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: "/", name: "AdminPage", component: AdminPage},
+        {path: "/booking", name: "AdminBooking", component: AdminBooking},
         {path: "/users", name: "AdminUserPage", component: AdminUser},
         {path: "/addUser", name: "AddUserPage", component: AddUserPage},
         {path: "/editUser/:id", name: "EditUserPage", component: EditUser},
