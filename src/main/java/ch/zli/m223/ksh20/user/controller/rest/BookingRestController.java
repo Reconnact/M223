@@ -76,7 +76,7 @@ public class BookingRestController {
         String token = header.split(" ")[0].trim();
         if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
                 jwtUtils.getRoleFromJwtToken(token).equals("member")){
-            bookingService.addBooking(LocalDate.parse(bookingInput.date), bookingInput.isFullDay, bookingInput.accepted, 1L);
+            bookingService.addBooking(LocalDate.parse(bookingInput.date), bookingInput.isFullDay, false, 1L);
         } else {
             System.out.println("log in");
         }

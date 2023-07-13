@@ -23,7 +23,7 @@ public class AppUserImpl implements AppUser {
     private String passwordHash;
 
     @Column()
-    private String role = "guest";
+    private String role = "member";
 
     /*
     Bro unglaublich - Join mit booking

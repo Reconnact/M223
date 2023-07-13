@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public AppUser addUser(String firstName, String lastName,
                                  String email, String password) {
+        String role = "member";
         if (password == null || password == "" || email == null || email == "" ) {
             throw new InvalidEmailOrPasswordException();
         }
@@ -39,7 +40,11 @@ public class UserServiceImpl implements UserService{
             throw new UserAlreadyExistsException();
         }
 
-        return userRepository.insertUser(firstName, lastName, email, password, "member");
+        if (getUserList().isEmpty()){
+            role = "admin";
+        }
+
+        return userRepository.insertUser(firstName, lastName, email, password, role);
 
     }
 
