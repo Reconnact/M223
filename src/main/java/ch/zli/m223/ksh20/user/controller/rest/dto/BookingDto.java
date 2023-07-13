@@ -12,14 +12,17 @@ public class BookingDto {
 
     public LocalDate date;
     public boolean isFullDay, accepted;
-    public Long id, userId;
+    public Long id;
+    public String userName;
 
-    public BookingDto(Booking booking) {
+    public BookingDto(Booking booking, UserService userService) {
+
+        AppUser user = userService.getUserById(booking.getUserId());
 
         id = booking.getId();
         date = booking.getDate();
         isFullDay = booking.isFullDay();
         accepted = booking.accepted();
-        userId = booking.getUserId();
+        userName = user.getFirstName() + " " + user.getLastName();
     }
 }

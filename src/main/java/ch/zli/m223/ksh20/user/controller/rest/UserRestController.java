@@ -4,9 +4,13 @@ import ch.zli.m223.ksh20.user.controller.rest.dto.UserInputDto;
 import ch.zli.m223.ksh20.user.controller.rest.dto.UserLoginDto;
 import ch.zli.m223.ksh20.user.model.AppUser;
 import ch.zli.m223.ksh20.user.model.impl.AppUserImpl;
+import ch.zli.m223.ksh20.user.security.JwtResponse;
+import ch.zli.m223.ksh20.user.security.JwtUtils;
 import ch.zli.m223.ksh20.user.service.UserService;
 import ch.zli.m223.ksh20.user.service.impl.UserServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +26,9 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @PostMapping("/register")
     void register(@RequestBody UserInputDto userInput) {
         userService.addUser(userInput.firstName, userInput.lastName, userInput.email, userInput.password);
@@ -29,40 +36,80 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
-    void login(@RequestBody UserLoginDto userInput) {
+    ResponseEntity<?> login(@RequestBody UserLoginDto userInput,
+               HttpServletResponse response) {
 
-        System.out.println(userService.login(userInput.email, userInput.password));
+        // TODO: Token magic in frontend
+
+        AppUser user = userService.login(userInput.email, userInput.password);
+        String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole(), user.getId());
+        response.setHeader("Authorization", token);
+
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 
     @GetMapping("/{id}")
-    Map<String, String> getUser(@PathVariable Long id) {
-        AppUser user = userService.getUserById(id);
+    Map<String, String> getUser(@PathVariable Long id,
+                                @RequestHeader("Authorization") String header) {
+        String token = header.split(" ")[0].trim();
         HashMap<String, String> map = new HashMap<>();
-        if (user.getEmail() == "" || user.getEmail().isEmpty()){
-            return map;
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
+                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
+                        jwtUtils.getIdFromJwtToken(token) == id)){
+            AppUser user = userService.getUserById(id);
+            if (user.getEmail() == "" || user.getEmail().isEmpty()){
+                return map;
+            }
+            map.put("firstName", user.getFirstName());
+            map.put("lastName", user.getLastName());
+            map.put("email", user.getEmail());
         }
-        map.put("firstName", user.getFirstName());
-        map.put("lastName", user.getLastName());
-        map.put("email", user.getEmail());
         return map;
     }
 
     @PutMapping("/{id}/update")
-    void update(@RequestBody UserInputDto userInput, @PathVariable Long id) {
-        userService.updateUser(id, userInput.firstName, userInput.lastName, userInput.email);
+    void update(@RequestBody UserInputDto userInput,
+                @PathVariable Long id,
+                @RequestHeader("Authorization") String header) {
+        String token = header.split(" ")[0].trim();
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
+                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
+                        jwtUtils.getIdFromJwtToken(token) == id)){
+            userService.updateUser(id, userInput.firstName, userInput.lastName, userInput.email);
+        } else {
+            System.out.println("not allowed");
+        }
+
     }
 
     @DeleteMapping("/{id}/delete")
-    void delete(Model model, @PathVariable Long id) {
-        userService.deleteUser(id);
-        List<AppUser> users = userService.getUserList();
-        model.addAttribute("users", users);
+    void delete(Model model,
+                @PathVariable Long id,
+                @RequestHeader("Authorization") String header) {
+        String token = header.split(" ")[0].trim();
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
+                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
+                        jwtUtils.getIdFromJwtToken(token) == id)){
+            userService.deleteUser(id);
+            List<AppUser> users = userService.getUserList();
+            model.addAttribute("users", users);
+        } else {
+            System.out.println("not allowed");
+        }
+
     }
 
     @GetMapping("/list")
-    List<UserDto> getUserList() {
-       return userService.getUserList().stream()
-                .map(user -> new UserDto(user))
-                .collect(Collectors.toList());
+    List<UserDto> getUserList(
+            @RequestHeader("Authorization") String header
+    ) {
+        String token = header.split(" ")[0].trim();
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin")){
+            return userService.getUserList().stream()
+                    .map(user -> new UserDto(user))
+                    .collect(Collectors.toList());
+        }else {
+            return new ArrayList<>();
+        }
     }
 }

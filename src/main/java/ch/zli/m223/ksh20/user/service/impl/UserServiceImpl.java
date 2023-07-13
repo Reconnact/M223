@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -44,7 +45,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public AppUser login(String email, String password) {
-        return new AppUserImpl("","",email, password, "");
+        Optional<AppUser> u = userRepository.findByEmail(email);
+        if (u.isPresent() && u.get().getPassword().equals(password)) {
+            return u.get();
+        }
+        return null;
     }
 
     @Override

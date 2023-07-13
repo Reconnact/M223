@@ -1,5 +1,6 @@
 package ch.zli.m223.ksh20.user.service;
 
+import ch.zli.m223.ksh20.user.model.AppUser;
 import ch.zli.m223.ksh20.user.model.Booking;
 import ch.zli.m223.ksh20.user.model.impl.BookingImpl;
 
