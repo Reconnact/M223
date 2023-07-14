@@ -13,12 +13,14 @@ import AddBookingPage from "@/components/AddBookingPage.vue";
 import Login from "@/components/login.vue";
 import EditBooking from "@/components/admin/booking/EditBooking.vue";
 import mainPage from "@/components/mainPage.vue";
+import Register from "@/components/register.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: "/", name: "MainPage", component: mainPage },
         {path: "/login", name: "LoginPage", component: Login },
+        {path: "/register", name: "RegisterPage", component: Register },
         {path: "/booking", name: "AdminBooking", component: AdminBooking},
         {path: "/users", name: "AdminUserPage", component: AdminUser},
         {path: "/addUser", name: "AddUserPage", component: AddUserPage},

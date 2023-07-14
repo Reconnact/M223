@@ -3,6 +3,14 @@
     <h2>Login</h2>
     <form>
       <div class="user-box">
+        <input type="text" id="firstName" required>
+        <label>First name</label>
+      </div>
+      <div class="user-box">
+        <input type="text" id="lastName" required>
+        <label>Last name</label>
+      </div>
+      <div class="user-box">
         <input type="text" id="email" required>
         <label>E-Mail</label>
       </div>
@@ -10,7 +18,7 @@
         <input type="password" id="password" required>
         <label>Password</label>
       </div>
-      <a @click="login()">
+      <a @click="register()">
         <span></span>
         <span></span>
         <span></span>
@@ -18,7 +26,6 @@
         Submit
       </a>
     </form>
-    <button class="edit-button"  onclick="window.location.href='/register'">Register</button>
   </div>
 </template>
 <script>
@@ -26,28 +33,29 @@
 import axios from "axios";
 
 export default {
-  name: 'LoginPage',
+  name: 'RegisterPage',
   mounted() {
     if (localStorage.getItem("user") != null) {
       window.location.href = "/";
     }
   },
   methods: {
-    login: async function  () {
+    register: async function  () {
       try {
         await axios({
           method: 'post',
-          url: "/api/v1/users/login",
+          url: "/api/v1/users/register",
           headers: {
             'Content-Type': 'application/json'
           },
           data: {
+            "firstName": document.getElementById("firstName").value,
+            "lastName": document.getElementById("lastName").value,
             "email": document.getElementById("email").value,
             "password": document.getElementById("password").value
           }
-        }).then((response) => {
-          localStorage.setItem('user', response.data.token);
-          window.location.href = "/"
+        }).then(() => {
+          window.location.href = "/login"
         });
       } catch (error) {
         console.error(error);
@@ -144,18 +152,6 @@ export default {
   display: block;
 }
 
-.edit-button {
-  background-color: #3639f4;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 2px 2px;
-  cursor: pointer;
-}
 .adduser-box a span:nth-child(1) {
   top: 0;
   left: -100%;
