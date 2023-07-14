@@ -1,0 +1,685 @@
+{
+	"id": "63bf48db-318c-4e9f-b25c-7e5289c789a8",
+	"name": "M223 User",
+	"timestamp": "2023-07-14T11:15:20.011Z",
+	"collection_id": "28458858-03808a86-d0aa-4835-8c78-245940d2fecd",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 23,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-07-14T11:15:17.434Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "4d566400-0458-4327-a729-e16321303044",
+			"name": "1.0 register",
+			"url": "http://localhost:8080/api/v1/users/register",
+			"time": 262,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Register Authentication - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Register Authentication - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				262
+			],
+			"allTests": [
+				{
+					"Register Authentication - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "b549f87e-a1e9-4926-8f83-f6592bc04e70",
+			"name": "1.1 register (email already in use)",
+			"url": "http://localhost:8080/api/v1/users/register",
+			"time": 52,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Register - Email already in use - Status code is 409": true
+			},
+			"testPassFailCounts": {
+				"Register - Email already in use - Status code is 409": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				52
+			],
+			"allTests": [
+				{
+					"Register - Email already in use - Status code is 409": true
+				}
+			]
+		},
+		{
+			"id": "c4e28dba-bc3a-4dac-8355-b85c682c90b2",
+			"name": "1.2 register (invalid input)",
+			"url": "http://localhost:8080/api/v1/users/register",
+			"time": 5,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Register - Invalid input - Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Register - Invalid input - Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Register - Invalid input - Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "9ea2b817-9222-4cea-bc68-7d3ecc094ab9",
+			"name": "1.3 login (admin)",
+			"url": "http://localhost:8080/api/v1/users/login",
+			"time": 58,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login - Status code is 200": true,
+				"Extract value and set variable": true
+			},
+			"testPassFailCounts": {
+				"Login - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Extract value and set variable": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				58
+			],
+			"allTests": [
+				{
+					"Login - Status code is 200": true,
+					"Extract value and set variable": true
+				}
+			]
+		},
+		{
+			"id": "e0c47caa-13d2-404c-ada2-091e44bf8653",
+			"name": "1.4 login (member)",
+			"url": "http://localhost:8080/api/v1/users/login",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login - Status code is 200": true,
+				"Extract value and set variable": true
+			},
+			"testPassFailCounts": {
+				"Login - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Extract value and set variable": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Login - Status code is 200": true,
+					"Extract value and set variable": true
+				}
+			]
+		},
+		{
+			"id": "9ec34f8e-1b15-4db3-bcad-c8d453d49b4d",
+			"name": "1.5 login (invalid input)",
+			"url": "http://localhost:8080/api/v1/users/login",
+			"time": 14,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Login - Invalid input - Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Login - Invalid input - Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Login - Invalid input - Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "ceeeb75f-facf-42f9-8ed5-d0bb751cab25",
+			"name": "2.0 add booking",
+			"url": "http://localhost:8080/api/v1/bookings/add",
+			"time": 46,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Member Bookings - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Member Bookings - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				46
+			],
+			"allTests": [
+				{
+					"Member Bookings - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "893efe9d-a63c-497f-b2ce-7062a2ce6c42",
+			"name": "2.1 add booking (invalid input)",
+			"url": "http://localhost:8080/api/v1/bookings/add",
+			"time": 5,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Add Booking - Invalid input - Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Add Booking - Invalid input - Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Add Booking - Invalid input - Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "2823596f-7919-41fd-a970-78630d10f331",
+			"name": "2.2 delete booking",
+			"url": "http://localhost:8080/api/v1/bookings/3/delete",
+			"time": 73,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Delete Booking - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Delete Booking - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				73
+			],
+			"allTests": [
+				{
+					"Delete Booking - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "3c514452-a21f-4071-a512-260a3a076ac5",
+			"name": "2.3 delete booking (wrong user)",
+			"url": "http://localhost:8080/api/v1/bookings/1/delete",
+			"time": 12,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Delete Booking - Wrong user - Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Delete Booking - Wrong user - Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Delete Booking - Wrong user - Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "db736a82-5f18-4edf-aeb9-c00d242c7ec9",
+			"name": "3.0 delete members booking",
+			"url": "http://localhost:8080/api/v1/bookings/5/delete",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Delete member - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Delete member - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Delete member - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "ce3115db-4f24-43c0-97d9-908708308fcd",
+			"name": "3.1 approve booking",
+			"url": "http://localhost:8080/api/v1/bookings/1/update",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Approve booknig - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Approve booknig - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Approve booknig - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "83e8275e-50f6-4bcb-b0f9-d8aa16b6f8f0",
+			"name": "3.2 approve booking (invalid input)",
+			"url": "http://localhost:8080/api/v1/bookings/1/update",
+			"time": 11,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Approve booknig (invalid input) - Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Approve booknig (invalid input) - Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Approve booknig (invalid input) - Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "404937f6-350b-4f57-bdac-98416b1233e6",
+			"name": "4.0 list users",
+			"url": "http://localhost:8080/api/v1/users/list",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"List Users - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"List Users - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"List Users - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "682ccfda-f4cb-47ec-89e9-5205568f8499",
+			"name": "4.1 list users (as member)",
+			"url": "http://localhost:8080/api/v1/users/list",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"List Users - As member - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"List Users - As member - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"List Users - As member - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "74847330-424a-4665-a05c-cebfcc752120",
+			"name": "4.2 get one user",
+			"url": "http://localhost:8080/api/v1/users/3",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Get One User - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Get One User - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Get One User - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "af88f047-f0d2-45c6-990a-437840f24602",
+			"name": "4.3 get one user (as member)",
+			"url": "http://localhost:8080/api/v1/users/1",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Get One User - As member - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Get One User - As member - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Get One User - As member - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "6044bc16-0ac8-42ca-acbc-7ea25a7ab462",
+			"name": "4.4 delete user",
+			"url": "http://localhost:8080/api/v1/users/1/delete",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Delete User - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Delete User - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Delete User - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "18b52ae4-58cb-4a8a-9a6a-3c84417260d6",
+			"name": "4.5 delete user (as member)",
+			"url": "http://localhost:8080/api/v1/users/1/delete",
+			"time": 6,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Delete User - As member - Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Delete User - As member - Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Delete User - As member - Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "9ef1a870-40c2-4c1b-b747-0eb3065e06f9",
+			"name": "5.0 is user admin",
+			"url": "http://localhost:8080/api/v1/users/isAdmin",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Is User Admin - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Is User Admin - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Is User Admin - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "b0ef3df9-bd30-4c58-9a0e-e6d131e1f18e",
+			"name": "5.1 delete own account",
+			"url": "http://localhost:8080/api/v1/users/1/delete",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Delete Own Account - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Delete Own Account - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Delete Own Account - Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 652,
+	"collection": {
+		"requests": [
+			{
+				"id": "4d566400-0458-4327-a729-e16321303044",
+				"method": "POST"
+			},
+			{
+				"id": "b549f87e-a1e9-4926-8f83-f6592bc04e70",
+				"method": "POST"
+			},
+			{
+				"id": "c4e28dba-bc3a-4dac-8355-b85c682c90b2",
+				"method": "POST"
+			},
+			{
+				"id": "9ea2b817-9222-4cea-bc68-7d3ecc094ab9",
+				"method": "POST"
+			},
+			{
+				"id": "e0c47caa-13d2-404c-ada2-091e44bf8653",
+				"method": "POST"
+			},
+			{
+				"id": "9ec34f8e-1b15-4db3-bcad-c8d453d49b4d",
+				"method": "POST"
+			},
+			{
+				"id": "ceeeb75f-facf-42f9-8ed5-d0bb751cab25",
+				"method": "POST"
+			},
+			{
+				"id": "893efe9d-a63c-497f-b2ce-7062a2ce6c42",
+				"method": "POST"
+			},
+			{
+				"id": "2823596f-7919-41fd-a970-78630d10f331",
+				"method": "DELETE"
+			},
+			{
+				"id": "3c514452-a21f-4071-a512-260a3a076ac5",
+				"method": "DELETE"
+			},
+			{
+				"id": "db736a82-5f18-4edf-aeb9-c00d242c7ec9",
+				"method": "DELETE"
+			},
+			{
+				"id": "ce3115db-4f24-43c0-97d9-908708308fcd",
+				"method": "PUT"
+			},
+			{
+				"id": "83e8275e-50f6-4bcb-b0f9-d8aa16b6f8f0",
+				"method": "PUT"
+			},
+			{
+				"id": "404937f6-350b-4f57-bdac-98416b1233e6",
+				"method": "GET"
+			},
+			{
+				"id": "682ccfda-f4cb-47ec-89e9-5205568f8499",
+				"method": "GET"
+			},
+			{
+				"id": "74847330-424a-4665-a05c-cebfcc752120",
+				"method": "GET"
+			},
+			{
+				"id": "af88f047-f0d2-45c6-990a-437840f24602",
+				"method": "GET"
+			},
+			{
+				"id": "6044bc16-0ac8-42ca-acbc-7ea25a7ab462",
+				"method": "DELETE"
+			},
+			{
+				"id": "18b52ae4-58cb-4a8a-9a6a-3c84417260d6",
+				"method": "DELETE"
+			},
+			{
+				"id": "9ef1a870-40c2-4c1b-b747-0eb3065e06f9",
+				"method": "GET"
+			},
+			{
+				"id": "b0ef3df9-bd30-4c58-9a0e-e6d131e1f18e",
+				"method": "DELETE"
+			}
+		]
+	}
+}

@@ -37,6 +37,8 @@
   </div>
   <button class="edit-button" onclick="window.location.href = '/addBooking'" >Add Booking</button>
   <button class="edit-button"  @click="editAccount">Edit Account</button>
+  <button v-if="isAdmin" class="edit-button"  onclick="window.location.href='/users'">User-List</button>
+  <button v-if="isAdmin" class="edit-button"  onclick="window.location.href='/booking'">Booking-List</button>
   <br><br>
 </template>
 <script>
@@ -51,7 +53,8 @@ export default {
   name: 'MainPage',
   data() {
     return {
-      bookings: []
+      bookings: [],
+      isAdmin: false
     };
   },
   async mounted() {
@@ -61,6 +64,7 @@ export default {
     const res = await axios.get('/api/v1/bookings/own/list' , config);
     const data = await res.data;
     this.bookings = data;
+    await axios.get('/api/v1/users/isAdmin' , config).then((result) => {this.isAdmin = result.data})
   },
   methods: {
     deleteBooking: async function  (id) {
