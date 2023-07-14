@@ -59,8 +59,7 @@ export default {
     if (localStorage.getItem("user") == null) {
       window.location.href = "/login";
     }
-    //TODO: eigene
-    const res = await axios.get('/api/v1/bookings/list', config);
+    const res = await axios.get('/api/v1/bookings/own/list' , config);
     const data = await res.data;
     this.bookings = data;
   },

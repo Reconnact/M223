@@ -43,14 +43,16 @@ public class BookingRestController {
     }
 
     @GetMapping("/own/list")
-    List<Booking> getOwnList(
+    List<BookingDto> getOwnList(
             @RequestHeader("Authorization") String header
     ){
         String token = header.split(" ")[0].trim();
         if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
                 (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
                         jwtUtils.getIdFromJwtToken(token) == jwtUtils.getIdFromJwtToken(token))){
-            return bookingService.getOwnBookings(jwtUtils.getIdFromJwtToken(token));
+            return bookingService.getOwnBookings(jwtUtils.getIdFromJwtToken(token)).stream()
+                    .map(booking -> new BookingDto(booking, userService))
+                    .collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
