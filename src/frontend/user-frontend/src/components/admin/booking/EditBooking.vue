@@ -40,6 +40,14 @@ export default {
     };
   },
   async mounted() {
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
     const res = await axios.get('/api/v1/bookings/' +  this.$route.params.id, config)
         .catch(function (error) {
           window.location.href = "/404";

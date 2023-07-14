@@ -34,6 +34,16 @@ export default {
       date: new Date().toISOString().split('T')[0]
     };
   },
+  mounted() {
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
+  },
   methods: {
     addBooking: async function  () {
       console.log(document.getElementById("date").value)
@@ -54,7 +64,7 @@ export default {
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/";
+          window.location.href = "/booking";
         }
       } catch (error) {
         console.error(error);

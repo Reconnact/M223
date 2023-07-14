@@ -59,6 +59,14 @@ export default {
     };
   },
   async mounted() {
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
     const res = await axios.get('/api/v1/bookings/list', config);
     const data = await res.data;
     this.bookings = data;

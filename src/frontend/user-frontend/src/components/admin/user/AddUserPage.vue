@@ -38,8 +38,19 @@ let config = {
 }
 export default {
   name: 'AddUserPage',
+  mounted() {
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
+  },
   methods: {
     addUser: async function  () {
+
       try {
         const response = await axios({
           method: 'post',

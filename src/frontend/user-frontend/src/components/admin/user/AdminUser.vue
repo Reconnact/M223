@@ -58,7 +58,14 @@ export default {
     };
   },
   async mounted() {
-    console.log(localStorage.getItem("user"));
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
     await axios.get('/api/v1/users/list', config)
         .then((res) => {
           const data =  res.data;

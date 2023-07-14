@@ -26,6 +26,11 @@ import axios from "axios";
 
 export default {
   name: 'LoginPage',
+  mounted() {
+    if (localStorage.getItem("user") != null) {
+      window.location.href = "/";
+    }
+  },
   methods: {
     login: async function  () {
       try {
@@ -41,6 +46,7 @@ export default {
           }
         }).then((response) => {
           localStorage.setItem('user', response.data.token);
+          window.location.href = "/"
         });
       } catch (error) {
         console.error(error);
