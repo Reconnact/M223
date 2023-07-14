@@ -11,15 +11,15 @@ mit einem Datum ausgestattet.
 ## Aufsetzung
 Um das Produkt aufzusetzen, können Sie das Projekt in eine
 IDE importieren und die Klasse `Main` ausführen. Voraussetzung ist das 
-Maven alle Dependencies heruntergeladen hat. Alternativ können Sie das
-Produkt auch mit dem Befehl `mvn clean javafx:run` ausführen. Um das UI
-zu sehen, müssen Sie sich noch vue installieren und den Befehl
-npm run dev ausführen. Um Vue zu installieren, müssen Sie den Befehl
-`npm install vue` ausführen.
+Maven alle Dependencies heruntergeladen hat. Um das UI
+zu sehen, müssen Sie sich noch vue installieren. Um Vue zu installieren, 
+müssen Sie den Befehl `npm install vue` ausführen.
 
 ## Starten
 Um das Produkt zu starten, können Sie die Klasse `Main` ausführen.
-Alternativ können Sie auch den Befehl `mvn clean javafx:run` ausführen.
+Für das Frontend, welches standardmässig auf Port 3000 läuft, müssen Sie
+in den Ordner src/main/frontend/user-frontend und dort den Befehl `vue serve`
+ausführen.
 
 ## Testen
 Um die Testdaten zu laden, können Sie das Json File von Postman verwenden.
