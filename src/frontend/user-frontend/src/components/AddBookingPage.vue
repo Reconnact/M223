@@ -22,7 +22,11 @@
 <script>
 
 import axios from "axios";
-
+let config = {
+  headers: {
+    Authorization: localStorage.getItem("user"),
+  }
+}
 export default {
   name: 'AddBookingPasge',
   data() {
@@ -30,15 +34,21 @@ export default {
       date: new Date().toISOString().split('T')[0]
     };
   },
+  mounted() {
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+  },
   methods: {
     addBooking: async function  () {
       console.log(document.getElementById("date").value)
       try {
         const response = await axios({
           method: 'post',
-          url: "/api/v1/booking/register",
+          url: "/api/v1/bookings/add",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("user")
           },
           data: {
             "date": document.getElementById("date").value,
@@ -49,7 +59,11 @@ export default {
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/";
+          if ('referrer' in document) {
+            window.location = document.referrer;
+          } else {
+            window.history.back();
+          }
         }
       } catch (error) {
         console.error(error);

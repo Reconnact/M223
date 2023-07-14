@@ -7,79 +7,68 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>E-mail</th>
-        <th>Role</th>
-        <th>Edit</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Status</th>
         <th>Delete</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="user in users" :key="user.id" :id="user.id">
+      <tr v-for="booking in bookings" :key="booking.id" :id="booking.id" v-bind:class = "(booking.accepted)?'accepted':'notAccepted'">
         <td >
-          {{ user.id }}
+          {{ booking.id }}
         </td>
         <td >
-          {{ user.firstName }}
+          {{ booking.date }}
         </td>
-        <td >
-          {{ user.lastName }}
+        <td v-if="booking.isFullDay">
+          Full day
         </td>
-        <td >
-          {{ user.email }}
+        <td v-else>
+          Half day
         </td>
-        <td >
-          {{ user.role }}
+        <td v-if="booking.accepted">
+          Accepted
         </td>
-        <td><button class="edit-button"  @click="editUser(user.id)">Edit</button></td>
-        <td><button class="delete-button"  @click="deleteUser(user.id)">Delete</button></td>
-
+        <td v-else>
+          Not accepted
+        </td>
+        <td><button class="delete-button"  @click="deleteBooking(booking.id)">Delete</button></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <button onclick="window.location.href = '/addUser'" >Add User</button>
+  <button onclick="window.location.href = '/addBooking'" >Add Booking</button>
 </template>
 <script>
 
 import axios from "axios";
-
 let config = {
   headers: {
     Authorization: localStorage.getItem("user"),
   }
 }
 export default {
-  name: 'AdminUser',
+  name: 'MainPage',
   data() {
     return {
-      users: []
+      bookings: []
     };
   },
   async mounted() {
     if (localStorage.getItem("user") == null) {
       window.location.href = "/login";
     }
-    axios.get("/api/v1/users/isAdmin", config).then((res) => {
-      if (!res.data){
-        window.location.href = "/";
-      }
-    });
-    await axios.get('/api/v1/users/list', config)
-        .then((res) => {
-          const data =  res.data;
-          this.users = data;
-      }
-    );
+    //TODO: eigene
+    const res = await axios.get('/api/v1/bookings/list', config);
+    const data = await res.data;
+    this.bookings = data;
   },
   methods: {
-    deleteUser: async function  (id) {
+    deleteBooking: async function  (id) {
       document.getElementById(id).style.display = "none ";
-
-
       try {
-        const response = (await axios.delete('/api/v1/users/' + id + "/delete", config));
+        const response = await axios.delete('/api/v1/bookings/' + id + "/delete", config);
 
         if (!response.status == 200) {
           throw new Error('Request failed');
@@ -88,9 +77,6 @@ export default {
         console.error(error);
       }
     },
-    editUser: async function  (id) {
-      window.location.href = "/editUser/" + id
-    }
   }
 
 };
@@ -99,6 +85,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.accepted {
+  background-color: rgba(66, 185, 131, 0.5);
+}
+
+.accepted:hover {
+  background-color: #42b983 !important;
+}
+
+.notAccepted {
+  background-color: rgba(248, 81, 81, 0.5);
+}
+
+.notAccepted:hover {
+  background-color: #fa7c73;
+}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -126,9 +128,7 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
-tr:hover {
-  background-color: #f5f5f5;
-}
+
 .delete-button {
   background-color: #f44336;
   color: white;

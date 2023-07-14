@@ -34,7 +34,11 @@
 <script>
 
 import axios from "axios";
-
+let config = {
+  headers: {
+    Authorization: localStorage.getItem("user"),
+  }
+}
 export default {
   name: 'EditUser',
   data() {
@@ -43,7 +47,15 @@ export default {
     };
   },
   async mounted() {
-    const res = await axios.get('/api/v1/users/' +  this.$route.params.id)
+    if (localStorage.getItem("user") == null) {
+      window.location.href = "/login";
+    }
+    axios.get("/api/v1/users/isAdmin", config).then((res) => {
+      if (!res.data){
+        window.location.href = "/";
+      }
+    });
+    const res = await axios.get('/api/v1/users/' +  this.$route.params.id, config)
         .catch(function (error) {
           window.location.href = "/404";
         });
@@ -58,7 +70,8 @@ export default {
           method: 'put',
           url: "/api/v1/users/" +this.$route.params.id + "/update",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("user"),
           },
           data: {
             "id": parseInt(this.$route.params.id),
@@ -71,7 +84,7 @@ export default {
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/";
+          window.location.href = "/users";
         }
       } catch (error) {
         console.error(error);

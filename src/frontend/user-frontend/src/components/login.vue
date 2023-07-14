@@ -1,15 +1,7 @@
 <template>
   <div class="adduser-box">
-    <h2>Add user</h2>
+    <h2>Login</h2>
     <form>
-      <div class="user-box">
-        <input type="text" id="firstName" required>
-        <label>First name</label>
-      </div>
-      <div class="user-box">
-        <input type="text" id="lastName" required>
-        <label>Last name</label>
-      </div>
       <div class="user-box">
         <input type="text" id="email" required>
         <label>E-Mail</label>
@@ -18,7 +10,7 @@
         <input type="password" id="password" required>
         <label>Password</label>
       </div>
-      <a @click="addUser()">
+      <a @click="login()">
         <span></span>
         <span></span>
         <span></span>
@@ -31,47 +23,31 @@
 <script>
 
 import axios from "axios";
-let config = {
-  headers: {
-    Authorization: localStorage.getItem("user"),
-  }
-}
+
 export default {
-  name: 'AddUserPage',
+  name: 'LoginPage',
   mounted() {
-    if (localStorage.getItem("user") == null) {
-      window.location.href = "/login";
+    if (localStorage.getItem("user") != null) {
+      window.location.href = "/";
     }
-    axios.get("/api/v1/users/isAdmin", config).then((res) => {
-      if (!res.data){
-        window.location.href = "/";
-      }
-    });
   },
   methods: {
-    addUser: async function  () {
-
+    login: async function  () {
       try {
-        const response = await axios({
+        await axios({
           method: 'post',
-          url: "/api/v1/users/register",
+          url: "/api/v1/users/login",
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("user")
+            'Content-Type': 'application/json'
           },
           data: {
-            "firstName": document.getElementById("firstName").value,
-            "lastName": document.getElementById("lastName").value,
             "email": document.getElementById("email").value,
             "password": document.getElementById("password").value
           }
+        }).then((response) => {
+          localStorage.setItem('user', response.data.token);
+          window.location.href = "/"
         });
-
-        if (!response.status == 200) {
-          throw new Error('Request failed');
-        } else {
-          window.location.href = "/users";
-        }
       } catch (error) {
         console.error(error);
       }
