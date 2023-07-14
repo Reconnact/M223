@@ -20,9 +20,9 @@ public class ServerInitialisation implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        userRepository.insertUser("Hermann", "Witte", "email", "password", "admin");
-        userRepository.insertUser("Jakub", "Corona", "email1", "password", "admin");
-        userRepository.insertUser("gast", "benutzer", "email2", "password", "guest");
+        userRepository.insertUser("Franz", "Kafka", "franzkafka@gmail.com", "password", "member");
+        userRepository.insertUser("Friedrich", "Dürrenmatt", "fduerrenmatt@gmail.com", "password", "admin");
+        userRepository.insertUser("Haruki", "Murakami", "harukiM@gmial.com", "password", "member");
         bookingRepository.insertBooking(LocalDate.of(2023, 6, 6), true, false, 1L);
         bookingRepository.insertBooking(LocalDate.of(2023, 4, 5), false, false, 2L);
         bookingRepository.insertBooking(LocalDate.of(2023, 12, 27), false, true, 3L);
