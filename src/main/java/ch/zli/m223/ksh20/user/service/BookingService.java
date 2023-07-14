@@ -10,6 +10,7 @@ import java.util.List;
 public interface BookingService {
 
     List<Booking> getBookingList();
+    List<Booking> getOwnBookings(Long userId);
     BookingImpl getBookingById(Long id);
     Booking addBooking(LocalDate date, boolean isFullDay, boolean accepted, Long userId);
     void updateBooking(Long id, LocalDate date, boolean isFullDay, boolean accepted);

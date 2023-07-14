@@ -3,9 +3,11 @@ import ch.zli.m223.ksh20.user.controller.rest.dto.UserDto;
 import ch.zli.m223.ksh20.user.controller.rest.dto.UserInputDto;
 import ch.zli.m223.ksh20.user.controller.rest.dto.UserLoginDto;
 import ch.zli.m223.ksh20.user.model.AppUser;
+import ch.zli.m223.ksh20.user.model.Booking;
 import ch.zli.m223.ksh20.user.model.impl.AppUserImpl;
 import ch.zli.m223.ksh20.user.security.JwtResponse;
 import ch.zli.m223.ksh20.user.security.JwtUtils;
+import ch.zli.m223.ksh20.user.service.BookingService;
 import ch.zli.m223.ksh20.user.service.UserService;
 import ch.zli.m223.ksh20.user.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +27,9 @@ import java.util.stream.Collectors;
 public class UserRestController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -65,6 +70,20 @@ public class UserRestController {
             map.put("email", user.getEmail());
         }
         return map;
+    }
+
+    @GetMapping("/{id}/all")
+    List<Booking> getOwnList(
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String header
+    ){
+        String token = header.split(" ")[0].trim();
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
+                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
+                        jwtUtils.getIdFromJwtToken(token) == id)){
+            return bookingService.getOwnBookings(id);
+        }
+        return new ArrayList<>();
     }
 
     @PutMapping("/{id}/update")

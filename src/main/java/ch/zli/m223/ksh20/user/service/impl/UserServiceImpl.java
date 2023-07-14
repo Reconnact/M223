@@ -23,6 +23,8 @@ public class UserServiceImpl implements UserService{
        return new ArrayList<>(userRepository.findAll());
     }
 
+
+
     @Override
     public AppUserImpl getUserById(Long id) {
         return userRepository.getReferenceById(id);

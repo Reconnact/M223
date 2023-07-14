@@ -23,6 +23,18 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<Booking> getOwnBookings(Long userId) {
+        List<Booking> bookings = new ArrayList<>();
+        for (Booking element:
+             getBookingList()) {
+            if (element.getUserId() == userId){
+                bookings.add(element);
+            }
+        }
+        return bookings;
+    }
+
+    @Override
     public BookingImpl getBookingById(Long id) {
         return bookingRepository.getReferenceById(id);
     }
