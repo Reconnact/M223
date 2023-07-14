@@ -17,3 +17,11 @@ zu sehen, müssen Sie sich noch vue installieren und den Befehl
 npm run dev ausführen. Um Vue zu installieren, müssen Sie den Befehl
 `npm install vue` ausführen.
 
+## Starten
+Um das Produkt zu starten, können Sie die Klasse `Main` ausführen.
+Alternativ können Sie auch den Befehl `mvn clean javafx:run` ausführen.
+
+## Testen
+Um die Testdaten zu laden, können Sie das Json File von Postman verwenden.
+Dazu müssen Sie in Postman auf Import klicken und das Json File auswählen.
+Anschliessend können Sie die Requests ausführen.
