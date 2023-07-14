@@ -38,9 +38,6 @@ public class UserRestController {
     @PostMapping("/login")
     ResponseEntity<?> login(@RequestBody UserLoginDto userInput,
                HttpServletResponse response) {
-
-        // TODO: Token magic in frontend
-
         AppUser user = userService.login(userInput.email, userInput.password);
         String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole(), user.getId());
         response.setHeader("Authorization", token);

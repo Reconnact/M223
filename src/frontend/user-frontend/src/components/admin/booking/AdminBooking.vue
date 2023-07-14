@@ -34,8 +34,8 @@
         <td v-else>
           Not accepted
         </td>
-        <td><button class="edit-button"  @click="editBooking(user.id)">Edit</button></td>
-        <td><button class="delete-button"  @click="deleteBooking(user.id)">Delete</button></td>
+        <td><button class="edit-button"  @click="editBooking(booking.id)">Edit</button></td>
+        <td><button class="delete-button"  @click="deleteBooking(booking.id)">Delete</button></td>
 
       </tr>
       </tbody>
@@ -46,7 +46,11 @@
 <script>
 
 import axios from "axios";
-
+let config = {
+  headers: {
+    Authorization: localStorage.getItem("user"),
+  }
+}
 export default {
   name: 'AdminBooking',
   data() {
@@ -55,7 +59,7 @@ export default {
     };
   },
   async mounted() {
-    const res = await axios.get('/api/v1/bookings/list');
+    const res = await axios.get('/api/v1/bookings/list', config);
     const data = await res.data;
     this.bookings = data;
   },
@@ -63,7 +67,7 @@ export default {
     deleteBooking: async function  (id) {
       document.getElementById(id).style.display = "none ";
       try {
-        const response = await axios.delete('/api/v1/bookings/' + id + "/delete");
+        const response = await axios.delete('/api/v1/bookings/' + id + "/delete", config);
 
         if (!response.status == 200) {
           throw new Error('Request failed');

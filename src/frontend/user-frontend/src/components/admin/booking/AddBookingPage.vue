@@ -22,7 +22,11 @@
 <script>
 
 import axios from "axios";
-
+let config = {
+  headers: {
+    Authorization: localStorage.getItem("user"),
+  }
+}
 export default {
   name: 'AddBookingPasge',
   data() {
@@ -36,9 +40,10 @@ export default {
       try {
         const response = await axios({
           method: 'post',
-          url: "/api/v1/booking/register",
+          url: "/api/v1/bookings/add",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("user")
           },
           data: {
             "date": document.getElementById("date").value,

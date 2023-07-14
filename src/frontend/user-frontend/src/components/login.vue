@@ -1,32 +1,21 @@
 <template>
   <div class="adduser-box">
-    <h2>Edit user</h2>
+    <h2>Login</h2>
     <form>
       <div class="user-box">
-        <input type="text" id="firstName" required :value="user.firstName">
-        <label>First name</label>
-      </div>
-      <div class="user-box">
-        <input type="text" id="lastName" required :value="user.lastName">
-        <label>Last name</label>
-      </div>
-      <div class="user-box">
-        <input type="text" id="email" required :value="user.email">
+        <input type="text" id="email" required>
         <label>E-Mail</label>
       </div>
-      <a @click="updateUser()">
+      <div class="user-box">
+        <input type="password" id="password" required>
+        <label>Password</label>
+      </div>
+      <a @click="login()">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         Submit
-      </a><br>
-      <a href="/">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Go Back
       </a>
     </form>
   </div>
@@ -34,56 +23,30 @@
 <script>
 
 import axios from "axios";
-let config = {
-  headers: {
-    Authorization: localStorage.getItem("user"),
-  }
-}
-export default {
-  name: 'EditUser',
-  data() {
-    return {
-      user: {}
-    };
-  },
-  async mounted() {
-    const res = await axios.get('/api/v1/users/' +  this.$route.params.id, config)
-        .catch(function (error) {
-          window.location.href = "/404";
-        });
 
-    const data = await res.data;
-    this.user = data;
-  },
-  methods : {
-    updateUser: async function  () {
+export default {
+  name: 'LoginPage',
+  methods: {
+    login: async function  () {
       try {
-        const response = await axios({
-          method: 'put',
-          url: "/api/v1/users/" +this.$route.params.id + "/update",
+        await axios({
+          method: 'post',
+          url: "/api/v1/users/login",
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("user"),
+            'Content-Type': 'application/json'
           },
           data: {
-            "id": parseInt(this.$route.params.id),
-            "firstName": document.getElementById("firstName").value,
-            "lastName": document.getElementById("lastName").value,
             "email": document.getElementById("email").value,
+            "password": document.getElementById("password").value
           }
+        }).then((response) => {
+          localStorage.setItem('user', response.data.token);
         });
-
-        if (!response.status == 200) {
-          throw new Error('Request failed');
-        } else {
-          window.location.href = "/users";
-        }
       } catch (error) {
         console.error(error);
       }
     }
   }
-
 };
 
 </script>

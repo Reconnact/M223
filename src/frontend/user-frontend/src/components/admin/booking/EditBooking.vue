@@ -1,32 +1,25 @@
 <template>
   <div class="adduser-box">
-    <h2>Edit user</h2>
+    <h2>Edit Booking</h2>
     <form>
       <div class="user-box">
-        <input type="text" id="firstName" required :value="user.firstName">
-        <label>First name</label>
+        <input type="date" id="date" required :value="booking.date">
       </div>
+      <div class="user-box" >
+        <span for="halfday">Full day</span><br>
+        <input type="radio" id="fullDay" name="duration" style="margin: 0" checked>
+        <br><br>
+        <span for="halfday">Half day</span><br>
+        <input type="radio" id="halfday" name="duration" style="margin: 0">
+      </div>
+      <br><br><br>
       <div class="user-box">
-        <input type="text" id="lastName" required :value="user.lastName">
-        <label>Last name</label>
+        <span for="halfday">Accepted</span><br>
+        <input type="checkbox" id="accepted" name="accepted" style="margin: 0">
       </div>
-      <div class="user-box">
-        <input type="text" id="email" required :value="user.email">
-        <label>E-Mail</label>
-      </div>
-      <a @click="updateUser()">
-        <span></span>
-        <span></span>
-        <span></span>
+      <a @click="editBooking()">
         <span></span>
         Submit
-      </a><br>
-      <a href="/">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Go Back
       </a>
     </form>
   </div>
@@ -40,43 +33,48 @@ let config = {
   }
 }
 export default {
-  name: 'EditUser',
+  name: 'EditBooking',
   data() {
     return {
-      user: {}
+      booking: {}
     };
   },
   async mounted() {
-    const res = await axios.get('/api/v1/users/' +  this.$route.params.id, config)
+    const res = await axios.get('/api/v1/bookings/' +  this.$route.params.id, config)
         .catch(function (error) {
           window.location.href = "/404";
         });
 
     const data = await res.data;
-    this.user = data;
+    this.booking = data;
+    if(data.isFullDay == "false") {
+      document.getElementById("halfday").checked = true;
+    }
+    if(data.accepted == "true") {
+      document.getElementById("accepted").checked = true;
+    }
   },
   methods : {
-    updateUser: async function  () {
+    editBooking: async function  () {
       try {
         const response = await axios({
           method: 'put',
-          url: "/api/v1/users/" +this.$route.params.id + "/update",
+          url: "/api/v1/bookings/" +this.$route.params.id + "/update",
           headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("user"),
           },
           data: {
-            "id": parseInt(this.$route.params.id),
-            "firstName": document.getElementById("firstName").value,
-            "lastName": document.getElementById("lastName").value,
-            "email": document.getElementById("email").value,
+            "date": document.getElementById("date").value,
+            "isFullDay": document.getElementById("fullDay").checked,
+            "accepted": document.getElementById("accepted").checked
           }
         });
 
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/users";
+          window.location.href = "/booking";
         }
       } catch (error) {
         console.error(error);

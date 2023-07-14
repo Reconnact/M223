@@ -45,6 +45,11 @@
 
 import axios from "axios";
 
+let config = {
+  headers: {
+    Authorization: localStorage.getItem("user"),
+  }
+}
 export default {
   name: 'AdminUser',
   data() {
@@ -53,15 +58,21 @@ export default {
     };
   },
   async mounted() {
-    const res = await axios.get('/api/v1/users/list');
-    const data = await res.data;
-    this.users = data;
+    console.log(localStorage.getItem("user"));
+    await axios.get('/api/v1/users/list', config)
+        .then((res) => {
+          const data =  res.data;
+          this.users = data;
+      }
+    );
   },
   methods: {
     deleteUser: async function  (id) {
       document.getElementById(id).style.display = "none ";
+
+
       try {
-        const response = await axios.delete('/api/v1/users/' + id + "/delete");
+        const response = (await axios.delete('/api/v1/users/' + id + "/delete", config));
 
         if (!response.status == 200) {
           throw new Error('Request failed');
