@@ -14,6 +14,8 @@ IDE importieren und die Klasse `Main` ausführen. Voraussetzung ist das
 Maven alle Dependencies heruntergeladen hat. Um das UI
 zu sehen, müssen Sie sich noch vue installieren. Um Vue zu installieren, 
 müssen Sie den Befehl `npm install vue` ausführen.
+Die Passwörter und Namen der Benutzer sind unter
+ch/zli/m223/ksh20/user/init/ServerInitialisation.java zu finden.
 
 ## Starten
 Um das Produkt zu starten, können Sie die Klasse `Main` ausführen.
