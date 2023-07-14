@@ -112,4 +112,12 @@ public class UserRestController {
             return new ArrayList<>();
         }
     }
+
+    @GetMapping("/isAdmin")
+    Boolean isAdmin(
+            @RequestHeader("Authorization") String header
+    ){
+        String token = header.split(" ")[0].trim();
+        return jwtUtils.getRoleFromJwtToken(token).equals("admin");
+    }
 }
