@@ -38,11 +38,6 @@ export default {
     if (localStorage.getItem("user") == null) {
       window.location.href = "/login";
     }
-    axios.get("/api/v1/users/isAdmin", config).then((res) => {
-      if (!res.data){
-        window.location.href = "/";
-      }
-    });
   },
   methods: {
     addBooking: async function  () {
@@ -64,7 +59,11 @@ export default {
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/booking";
+          if ('referrer' in document) {
+            window.location = document.referrer;
+          } else {
+            window.history.back();
+          }
         }
       } catch (error) {
         console.error(error);

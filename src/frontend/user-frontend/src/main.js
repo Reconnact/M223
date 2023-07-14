@@ -9,7 +9,7 @@ import EditUser from "@/components/admin/user/EditUser.vue";
 import PageNotFound from "@/components/PageNotFound.vue";
 import AdminUser from "@/components/admin/user/AdminUser.vue";
 import AdminBooking from "@/components/admin/booking/AdminBooking.vue";
-import AddBookingPage from "@/components/admin/booking/AddBookingPage.vue";
+import AddBookingPage from "@/components/AddBookingPage.vue";
 import Login from "@/components/login.vue";
 import EditBooking from "@/components/admin/booking/EditBooking.vue";
 import mainPage from "@/components/mainPage.vue";

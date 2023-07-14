@@ -7,6 +7,7 @@
       <thead>
       <tr>
         <th>ID</th>
+        <th>User</th>
         <th>Date</th>
         <th>Duration</th>
         <th>Status</th>
@@ -18,6 +19,9 @@
       <tr v-for="booking in bookings" :key="booking.id" :id="booking.id" v-bind:class = "(booking.accepted)?'accepted':'notAccepted'">
         <td >
           {{ booking.id }}
+        </td>
+        <td >
+          {{ booking.userName }}
         </td>
         <td >
           {{ booking.date }}
