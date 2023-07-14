@@ -50,15 +50,12 @@ export default {
     if (localStorage.getItem("user") == null) {
       window.location.href = "/login";
     }
-    axios.get("/api/v1/users/isAdmin", config).then((res) => {
-      if (!res.data){
-        window.location.href = "/";
-      }
-    });
     const res = await axios.get('/api/v1/users/' +  this.$route.params.id, config)
         .catch(function (error) {
           window.location.href = "/404";
-        });
+        }
+    );
+
 
     const data = await res.data;
     this.user = data;
@@ -84,7 +81,7 @@ export default {
         if (!response.status == 200) {
           throw new Error('Request failed');
         } else {
-          window.location.href = "/users";
+          window.location.href = "/";
         }
       } catch (error) {
         console.error(error);

@@ -5,7 +5,7 @@ import axios from 'axios';
 import mitt from 'mitt';
 import {createRouter, createWebHistory} from "vue-router";
 import AddUserPage from "@/components/admin/user/AddUserPage.vue";
-import EditUser from "@/components/admin/user/EditUser.vue";
+import EditUser from "@/components/EditUser.vue";
 import PageNotFound from "@/components/PageNotFound.vue";
 import AdminUser from "@/components/admin/user/AdminUser.vue";
 import AdminBooking from "@/components/admin/booking/AdminBooking.vue";

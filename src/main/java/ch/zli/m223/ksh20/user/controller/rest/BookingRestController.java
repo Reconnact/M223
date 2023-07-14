@@ -47,14 +47,9 @@ public class BookingRestController {
             @RequestHeader("Authorization") String header
     ){
         String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == jwtUtils.getIdFromJwtToken(token))){
-            return bookingService.getOwnBookings(jwtUtils.getIdFromJwtToken(token)).stream()
-                    .map(booking -> new BookingDto(booking, userService))
-                    .collect(Collectors.toList());
-        }
-        return new ArrayList<>();
+        return bookingService.getOwnBookings(jwtUtils.getIdFromJwtToken(token)).stream()
+                .map(booking -> new BookingDto(booking, userService))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -89,9 +84,9 @@ public class BookingRestController {
     void addBooking(@RequestBody BookingInputDto bookingInput,
                     @RequestHeader("Authorization") String header){
         String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                jwtUtils.getRoleFromJwtToken(token).equals("member")){
-            bookingService.addBooking(LocalDate.parse(bookingInput.date), bookingInput.isFullDay, false, 1L);
+        if (jwtUtils.getRoleFromJwtToken(token) != null || jwtUtils.getRoleFromJwtToken(token) != ""){
+            bookingService.addBooking(LocalDate.parse(bookingInput.date), bookingInput.isFullDay, false,
+                    jwtUtils.getIdFromJwtToken(token));
         } else {
             System.out.println("log in");
         }
@@ -101,16 +96,9 @@ public class BookingRestController {
     void deleteBooking(Model model,
                        @PathVariable Long id,
                        @RequestHeader("Authorization") String header){
-        String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == id)){
             bookingService.deleteBooking(id);
             List<Booking> bookings = bookingService.getBookingList();
             model.addAttribute("users", bookings);
-        } else {
-            System.out.println("not allowed");
-        }
 
     }
 

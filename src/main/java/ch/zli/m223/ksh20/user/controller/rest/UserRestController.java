@@ -55,9 +55,7 @@ public class UserRestController {
                                 @RequestHeader("Authorization") String header) {
         String token = header.split(" ")[0].trim();
         HashMap<String, String> map = new HashMap<>();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == id)){
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") || jwtUtils.getIdFromJwtToken(token) == id){
             AppUser user = userService.getUserById(id);
             if (user.getEmail() == "" || user.getEmail().isEmpty()){
                 return map;
@@ -82,9 +80,7 @@ public class UserRestController {
                 @PathVariable Long id,
                 @RequestHeader("Authorization") String header) {
         String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == id)){
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") || jwtUtils.getIdFromJwtToken(token) == id){
             userService.updateUser(id, userInput.firstName, userInput.lastName, userInput.email);
         } else {
             System.out.println("not allowed");
@@ -97,9 +93,7 @@ public class UserRestController {
                 @PathVariable Long id,
                 @RequestHeader("Authorization") String header) {
         String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == id)){
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||jwtUtils.getIdFromJwtToken(token) == id){
             userService.deleteUser(id);
             List<AppUser> users = userService.getUserList();
             model.addAttribute("users", users);

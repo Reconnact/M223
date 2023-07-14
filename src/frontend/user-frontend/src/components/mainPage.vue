@@ -1,9 +1,6 @@
 <template>
   <div>
     <table>
-
-    </table>
-    <table>
       <thead>
       <tr>
         <th>ID</th>
@@ -38,7 +35,9 @@
       </tbody>
     </table>
   </div>
-  <button onclick="window.location.href = '/addBooking'" >Add Booking</button>
+  <button class="edit-button" onclick="window.location.href = '/addBooking'" >Add Booking</button>
+  <button class="edit-button"  @click="editAccount">Edit Account</button>
+  <br><br>
 </template>
 <script>
 
@@ -65,7 +64,7 @@ export default {
   },
   methods: {
     deleteBooking: async function  (id) {
-      document.getElementById(id).style.display = "none ";
+      document.getElementById(id).style.display = "none";
       try {
         const response = await axios.delete('/api/v1/bookings/' + id + "/delete", config);
 
@@ -76,6 +75,10 @@ export default {
         console.error(error);
       }
     },
+    editAccount: async function(){
+      const response = await axios.get("/api/v1/users/getId", config);
+      window.location.href = '/editUser/' + response.data;
+    }
   }
 
 };
