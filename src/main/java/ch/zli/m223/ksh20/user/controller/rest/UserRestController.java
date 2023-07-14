@@ -70,11 +70,11 @@ public class UserRestController {
     }
 
     @GetMapping("/getId")
-    Long getId(
+    String getId(
             @RequestHeader("Authorization") String header
     ){
         String token = header.split(" ")[0].trim();
-        return jwtUtils.getIdFromJwtToken(token);
+        return jwtUtils.getIdFromJwtToken(token).toString();
     }
 
     @PutMapping("/{id}/update")
