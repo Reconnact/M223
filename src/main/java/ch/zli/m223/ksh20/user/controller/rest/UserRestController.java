@@ -69,20 +69,6 @@ public class UserRestController {
         return map;
     }
 
-    @GetMapping("/{id}/all")
-    List<Booking> getOwnList(
-            @PathVariable Long id,
-            @RequestHeader("Authorization") String header
-    ){
-        String token = header.split(" ")[0].trim();
-        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
-                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
-                        jwtUtils.getIdFromJwtToken(token) == id)){
-            return bookingService.getOwnBookings(id);
-        }
-        return new ArrayList<>();
-    }
-
     @PutMapping("/{id}/update")
     void update(@RequestBody UserInputDto userInput,
                 @PathVariable Long id,

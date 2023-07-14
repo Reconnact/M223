@@ -42,6 +42,19 @@ public class BookingRestController {
         return new ArrayList<>();
     }
 
+    @GetMapping("/own/list")
+    List<Booking> getOwnList(
+            @RequestHeader("Authorization") String header
+    ){
+        String token = header.split(" ")[0].trim();
+        if (jwtUtils.getRoleFromJwtToken(token).equals("admin") ||
+                (jwtUtils.getRoleFromJwtToken(token).equals("member") &&
+                        jwtUtils.getIdFromJwtToken(token) == jwtUtils.getIdFromJwtToken(token))){
+            return bookingService.getOwnBookings(jwtUtils.getIdFromJwtToken(token));
+        }
+        return new ArrayList<>();
+    }
+
     @GetMapping("/{id}")
     Map<String, String> getBooking(@PathVariable Long id,
                                    @RequestHeader("Authorization") String header){
