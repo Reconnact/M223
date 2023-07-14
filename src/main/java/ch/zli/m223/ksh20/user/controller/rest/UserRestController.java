@@ -43,11 +43,15 @@ public class UserRestController {
     @PostMapping("/login")
     ResponseEntity<?> login(@RequestBody UserLoginDto userInput,
                HttpServletResponse response) {
-        AppUser user = userService.login(userInput.email, userInput.password);
-        String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole(), user.getId());
-        response.setHeader("Authorization", token);
+        try {
+            AppUser user = userService.login(userInput.email, userInput.password);
+            String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole(), user.getId());
+            response.setHeader("Authorization", token);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+            return ResponseEntity.ok(new JwtResponse(token));
+        } catch (NullPointerException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/{id}")
@@ -89,7 +93,7 @@ public class UserRestController {
     }
 
     @DeleteMapping("/{id}/delete")
-    void delete(Model model,
+    ResponseEntity<?> delete(Model model,
                 @PathVariable Long id,
                 @RequestHeader("Authorization") String header) {
         String token = header.split(" ")[0].trim();
@@ -97,8 +101,9 @@ public class UserRestController {
             userService.deleteUser(id);
             List<AppUser> users = userService.getUserList();
             model.addAttribute("users", users);
+            return ResponseEntity.ok().build();
         } else {
-            System.out.println("not allowed");
+            return ResponseEntity.status(403).build();
         }
 
     }
